@@ -29,6 +29,7 @@ export default function Discover() {
           ))}
         </select>
       </div>
+      {console.log(Array.isArray(data))}
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.map((song: SongTypes) => (
           <SongCard key={song.key} song={song} i={song.key} />
