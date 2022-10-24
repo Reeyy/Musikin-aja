@@ -1,6 +1,6 @@
-import Error from '../components/Error';
-import Loader from '../components/Loader';
-import SongCard from '../components/SongCard';
+import Error from '../components/atom/Error';
+import Loader from '../components/atom/Error/Loader';
+import SongCard from '../components/molecules/SongCard';
 import { genres } from '../dummy/constants';
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
 import { SongTypes } from '../types';
@@ -33,10 +33,9 @@ export default function Discover() {
           ))}
         </select>
       </div>
-      {console.log(Array.isArray(data))}
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.map((song: SongTypes) => (
-          <SongCard key={song.key} song={song} i={song.key} />
+          <SongCard key={song.key} song={song} />
         ))}
       </div>
     </div>

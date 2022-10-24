@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
-import SearchBar from '../SearchBar';
-import SideBar from '../SideBar';
-import TopPlay from '../TopPlay';
+import SearchBar from '../../atom/SearchBar';
+import SideBar from '../../molecules/SideBar';
+import TopPlay from '../../molecules/TopPlay';
 
 interface LayoutProps {
   title?: string;
