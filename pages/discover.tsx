@@ -34,8 +34,8 @@ export default function Discover() {
         </select>
       </div>
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        {data?.map((song: SongTypes) => (
-          <SongCard key={song.key} song={song} />
+        {data?.map((song: SongTypes, i: number) => (
+          <SongCard key={song.key} index={i} song={song} />
         ))}
       </div>
     </div>
