@@ -1,5 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { SongTypes } from '../../types';
 
 // Define a service using a base URL and expected endpoints
 export const shazamCoreApi = createApi({
@@ -15,8 +16,8 @@ export const shazamCoreApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTopCharts: builder.query<any, string>({
-      query: (name) => '/charts/world',
+    getTopCharts: builder.query<SongTypes, void>({
+      query: () => '/charts/world',
     }),
   }),
 });
