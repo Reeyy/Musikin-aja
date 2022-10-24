@@ -19,12 +19,11 @@ export default function NavLink({ handleClick }: NavlinkProps) {
   return (
     <div className="mt-10">
       {links.map((item) => (
-        <Link
-          key={item.name}
-          href={item.to}
-          onClick={() => handleClick && handleClick()}
-        >
-          <a className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-cyan-400">
+        <Link key={item.name} href={item.to}>
+          <a
+            onClick={() => handleClick && handleClick()}
+            className="flex flex-row justify-start items-center my-8 text-sm font-medium text-gray-400 hover:text-cyan-400"
+          >
             <item.icon className="w-6 h-6 mr-2" />
             {item.name}
           </a>
