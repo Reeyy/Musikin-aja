@@ -6,12 +6,9 @@ import { SongTypes } from '../../types';
 export const shazamCoreApi = createApi({
   reducerPath: 'shazamCoreApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://shazam-core.p.rapidapi.com/v1',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
     prepareHeaders: (headers) => {
-      headers.set(
-        'X-RapidAPI-Key',
-        '086782ef66msh0e630f76ac4374bp1d1151jsn812ce2a17df4'
-      );
+      headers.set('X-RapidAPI-Key', process.env.NEXT_PUBLIC_HEADERS_KEY!);
       return headers;
     },
   }),
