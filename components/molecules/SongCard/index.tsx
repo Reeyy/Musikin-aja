@@ -8,10 +8,26 @@ import Link from 'next/link';
 interface SongCardProps {
   song: SongTypes;
   index: number;
+  isPlaying: boolean;
+  activeSong: any;
+  data: SongTypes[];
 }
 export default function SongCard(props: SongCardProps) {
-  const activeSong = 'tile';
-  const { song, index } = props;
+  const { song, index, activeSong, isPlaying, data } = props;
+  const dispatch = useDispatch();
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+  const handlePlayClick = () => {
+    dispatch(
+      setActiveSong({
+        song,
+        data,
+        index,
+      })
+    );
+    dispatch(playPause(true));
+  };
   return (
     <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
       <div className="relative w-full h-56 group">
@@ -22,7 +38,13 @@ export default function SongCard(props: SongCardProps) {
               : 'hidden'
           }`}
         >
-          <PlayPause />
+          <PlayPause
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            song={song}
+            handlePause={handlePauseClick}
+            handlePlay={handlePlayClick}
+          />
         </div>
         <img
           alt="song_img"

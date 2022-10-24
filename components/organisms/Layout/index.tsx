@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import SearchBar from '../../atom/SearchBar';
 import SideBar from '../../molecules/SideBar';
 import TopPlay from '../../molecules/TopPlay';
+import MusicPlayer from '../MusicPlayer';
 
 interface LayoutProps {
   title?: string;
@@ -11,6 +14,7 @@ interface LayoutProps {
 }
 export default function Layout(props: Partial<LayoutProps>) {
   const { title, content, children } = props;
+  const { activeSong } = useSelector((state: RootState) => state.player);
   return (
     <>
       <Head>
@@ -31,11 +35,11 @@ export default function Layout(props: Partial<LayoutProps>) {
           </div>
         </div>
 
-        {/* {activeSong?.title && (
-        <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
-          <MusicPlayer />
-        </div>
-      )} */}
+        {activeSong?.title && (
+          <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+            <MusicPlayer />
+          </div>
+        )}
       </div>
     </>
   );

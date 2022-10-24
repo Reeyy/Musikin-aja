@@ -1,25 +1,45 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useRef, useEffect } from 'react';
+import { SongTypes } from '../../../types';
 
-const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
-  const ref = useRef(null);
-  // eslint-disable-next-line no-unused-expressions
+interface PlayerProps {
+  activeSong: SongTypes;
+  isPlaying: boolean;
+  volume: number;
+  seekTime: number;
+  onEnded: () => void;
+  onTimeUpdate: (e: any) => void;
+  onLoadedData: (e: any) => void;
+  repeat: boolean;
+  currentIndex: any;
+}
+export default function Player(props: PlayerProps) {
+  const {
+    activeSong,
+    isPlaying,
+    volume,
+    seekTime,
+    onEnded,
+    onTimeUpdate,
+    onLoadedData,
+    repeat,
+  } = props;
+
+  const ref = React.useRef<HTMLAudioElement>(null);
+
   if (ref.current) {
     if (isPlaying) {
-      ref.current.play();
+      ref?.current.play();
     } else {
-      ref.current.pause();
+      ref?.current.pause();
     }
   }
-
   useEffect(() => {
-    ref.current.volume = volume;
+    ref.current!.volume = volume;
   }, [volume]);
   // updates audio element only on seekTime change (and not on each rerender):
   useEffect(() => {
-    ref.current.currentTime = seekTime;
+    ref.current!.currentTime = seekTime;
   }, [seekTime]);
-
   return (
     <audio
       src={activeSong?.hub?.actions[1]?.uri}
@@ -30,6 +50,4 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
       onLoadedData={onLoadedData}
     />
   );
-};
-
-export default Player;
+}

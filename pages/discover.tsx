@@ -1,10 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
 import Error from '../components/atom/Error';
 import Loader from '../components/atom/Error/Loader';
 import SongCard from '../components/molecules/SongCard';
 import { genres } from '../dummy/constants';
 import { useGetTopChartsQuery } from '../redux/services/shazamCore';
+import { RootState } from '../redux/store';
 import { SongTypes } from '../types';
 export default function Discover() {
+  const dispatch = useDispatch();
+  const { activeSong, isPlaying } = useSelector(
+    (state: RootState) => state.player
+  );
   const { data, isFetching, error } = useGetTopChartsQuery();
   console.log(data);
   const genreTitle = 'Pop';
@@ -35,7 +41,14 @@ export default function Discover() {
       </div>
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.map((song: SongTypes, i: number) => (
-          <SongCard key={song.key} index={i} song={song} />
+          <SongCard
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            key={song.key}
+            index={i}
+            song={song}
+            data={data}
+          />
         ))}
       </div>
     </div>
